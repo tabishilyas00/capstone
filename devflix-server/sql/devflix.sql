@@ -13,20 +13,8 @@ create table movie (
     `language` varchar(50) not null
 );
 
-create table director (
-    director_id int primary key auto_increment,
-    `name` varchar(50) not null,
-    imageURL varchar(1000) null
-);
-
-create table writer (
-    writer_id int primary key auto_increment,
-    `name` varchar(50) not null,
-    imageURL varchar(1000) null
-);
-
-create table actor (
-    actor_id int primary key auto_increment,
+create table person (
+    person_id int primary key auto_increment,
     `name` varchar(50) not null,
     imageURL varchar(1000) null
 );
@@ -40,8 +28,8 @@ create table movie_director (
         foreign key (movie_id)
         references movie(movie_id),
     constraint fk_movie_director_director_id
-        foreign key (director_id)
-        references director(director_id)
+        foreign key (person_id)
+        references person(person_id)
 );
 
 create table movie_writer (
@@ -53,8 +41,8 @@ create table movie_writer (
         foreign key (movie_id)
         references movie(movie_id),
     constraint fk_movie_writer_writer_id
-        foreign key (writer_id)
-        references writer(writer_id)
+        foreign key (person_id)
+        references person(person_id)
 );
 
 create table movie_actor (
@@ -66,6 +54,6 @@ create table movie_actor (
         foreign key (movie_id)
         references movie(movie_id),
     constraint fk_movie_actor_actor_id
-        foreign key (actor_id)
-        references actor(actor_id)
+        foreign key (person_id)
+        references person(person_id)
 );
