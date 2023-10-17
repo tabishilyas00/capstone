@@ -2,7 +2,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.io.IOException;
 
@@ -11,8 +10,7 @@ public class WebScrape {
         final String url = "https://www.imdb.com/chart/top/?ref_=nv_mv_250";
         final String imdbURL = "https://www.imdb.com";
 
-        Document doc = Jsoup.connect(url)
-                .get();
+        Document doc = Jsoup.connect(url).get();
 
         Elements body = doc.select("li.ipc-metadata-list-summary-item");
 
