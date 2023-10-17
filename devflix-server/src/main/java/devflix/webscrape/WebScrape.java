@@ -1,3 +1,5 @@
+package devflix.webscrape;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -6,7 +8,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 
 public class WebScrape {
-    public static void main(String[] args) throws IOException {
+    public static void scrape() throws IOException {
         final String url = "https://www.imdb.com/chart/top/?ref_=nv_mv_250";
         final String imdbURL = "https://www.imdb.com";
 
