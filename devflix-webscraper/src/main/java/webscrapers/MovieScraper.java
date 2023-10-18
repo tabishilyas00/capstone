@@ -1,4 +1,4 @@
-package devflix.webscrapers;
+package webscrapers;
 
 import devflix.models.Movie;
 import org.jsoup.Jsoup;
@@ -9,7 +9,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 
 public class MovieScraper {
-    public static void movieScrape() throws IOException {
+    public void movieScrape() throws IOException {
         Movie film = new Movie();
 
         final String url = "https://www.imdb.com/chart/top/?ref_=nv_mv_250";

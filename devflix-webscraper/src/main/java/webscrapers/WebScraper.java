@@ -1,4 +1,4 @@
-package devflix.webscrapers;
+package webscrapers;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
