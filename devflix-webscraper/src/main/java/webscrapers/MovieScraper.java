@@ -1,17 +1,18 @@
 package webscrapers;
 
-import devflix.models.Movie;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class MovieScraper {
-    public void movieScrape() throws IOException {
-        Movie film = new Movie();
-
+    public static void movieScrape() throws IOException, SQLException {
         final String url = "https://www.imdb.com/chart/top/?ref_=nv_mv_250";
         final String imdbURL = "https://www.imdb.com";
 
@@ -24,10 +25,8 @@ public class MovieScraper {
             Elements basicInfo = movie.select("div.sc-dffc6c81-0");
 
             String title = basicInfo.select("h1.sc-aFE43DEF-0 span.sc-afe43def-1").text();
-            film.setTitle(title);
 
             String year = basicInfo.select("li.ipc-inline-list__item").text().substring(0 , 4);
-            film.setYear(year);
 
             String rating;
             String runTime;
@@ -38,20 +37,29 @@ public class MovieScraper {
                 rating = "Not Rated";
                 runTime = basicInfo.select("li.ipc-inline-list__item").text().substring(year.length() + 1);
             }
-            film.setRating(rating);
-            film.setRunTime(runTime);
 
             Elements poster = movie.select("div.ipc-poster.ipc-poster--baseAlt.ipc-poster--dynamic-width.sc-30a29d44-0.dktfIa.ipc-sub-grid-item.ipc-sub-grid-item--span-2");
             String posterURL = poster.select("div.ipc-media.ipc-media--poster-27x40.ipc-image-media-ratio--poster-27x40.ipc-media--baseAlt.ipc-media--poster-l.ipc-poster__poster-image.ipc-media__img img").attr("src");
-            film.setPosterURL(posterURL);
 
-            System.out.println("Title       : " + film.getTitle());
-            System.out.println("Year        : " + film.getYear());
-            System.out.println("Rating      : " + film.getRating());
-            System.out.println("Run Time    : " + film.getRunTime());
-            System.out.println("Poster URL  : " + film.getPosterURL());
+            System.out.println("Title       : " + title);
+            System.out.println("Year        : " + year);
+            System.out.println("Rating      : " + rating);
+            System.out.println("Run Time    : " + runTime);
+            System.out.println("Poster URL  : " + posterURL);
 
             System.out.println();
+
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/devflix", "root", "4HYdje@4Vr4O");
+            PreparedStatement pstmt =
+                    conn.prepareStatement("insert into movie (title , `year` , rating , run_time , poster) values (? , ? , ? , ? , ?)");
+            pstmt.setString(1, title);
+            pstmt.setString(2, year);
+            pstmt.setString(3, rating);
+            pstmt.setString(4, runTime);
+            pstmt.setString(5, posterURL);
+            pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
         }
     }
 }
