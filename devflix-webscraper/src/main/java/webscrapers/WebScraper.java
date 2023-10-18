@@ -6,6 +6,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class WebScraper {
     public static void scrape() throws IOException {
@@ -59,6 +61,8 @@ public class WebScraper {
             }
             String stars = crew.substring(crew.indexOf("Stars") + 6 , crew.indexOf("Director" , crew.indexOf("Stars")) - 1);
 
+            List<Element> crewArray = crewInfo.select("a.ipc-metadata-list-item__list-content-item.ipc-metadata-list-item__list-content-item--link").stream().toList();
+
             Elements moreInfo = movie.select("ul.ipc-metadata-list.ipc-metadata-list--dividers-all.ipc-metadata-list--base");
             String more = moreInfo.select("li.ipc-metadata-list__item").text();
             String country;
@@ -84,6 +88,10 @@ public class WebScraper {
             System.out.println("Stars       : " + stars);
             System.out.println("Country(s)  : " + country);
             System.out.println("Language(s) : " + language);
+
+            System.out.println(crewArray.get(0).text());
+            System.out.println(crewArray.get(1).text());
+            System.out.println(crewArray.get(2).text());
 
             System.out.println();
         }
