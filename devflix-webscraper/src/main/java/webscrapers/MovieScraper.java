@@ -12,7 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class MovieScraper {
-    public static void movieScrape() throws IOException, SQLException {
+    public static void scrape() throws IOException, SQLException {
         final String url = "https://www.imdb.com/chart/top/?ref_=nv_mv_250";
         final String imdbURL = "https://www.imdb.com";
 
@@ -49,7 +49,7 @@ public class MovieScraper {
 
             System.out.println();
 
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/devflix", "root", "4HYdje@4Vr4O");
+            Connection conn = DriverManager.getConnection(System.getenv("DB_URL") , System.getenv("DB_USERNAME") , System.getenv("DB_PASSWORD"));
             PreparedStatement pstmt =
                     conn.prepareStatement("insert into movie (title , `year` , rating , run_time , poster) values (? , ? , ? , ? , ?)");
             pstmt.setString(1, title);
