@@ -10,10 +10,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class PersonScraper {
     public static void scrape() throws IOException, SQLException {
@@ -45,9 +43,6 @@ public class PersonScraper {
         }
 
         for (String name : crewNameImageMap.keySet()) {
-            System.out.println("Name      : " + name);
-            System.out.println("Image URL : " + crewNameImageMap.get(name));
-
             Connection conn = DriverManager.getConnection(System.getenv("DB_URL") , System.getenv("DB_USERNAME") , System.getenv("DB_PASSWORD"));
             PreparedStatement pstmt =
                     conn.prepareStatement("insert into person (`name` , imageURL) values (? , ?)");

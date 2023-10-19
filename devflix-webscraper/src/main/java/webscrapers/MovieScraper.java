@@ -41,14 +41,6 @@ public class MovieScraper {
             Elements poster = movie.select("div.ipc-poster.ipc-poster--baseAlt.ipc-poster--dynamic-width.sc-30a29d44-0.dktfIa.ipc-sub-grid-item.ipc-sub-grid-item--span-2");
             String posterURL = poster.select("div.ipc-media.ipc-media--poster-27x40.ipc-image-media-ratio--poster-27x40.ipc-media--baseAlt.ipc-media--poster-l.ipc-poster__poster-image.ipc-media__img img").attr("src");
 
-            System.out.println("Title       : " + title);
-            System.out.println("Year        : " + year);
-            System.out.println("Rating      : " + rating);
-            System.out.println("Run Time    : " + runTime);
-            System.out.println("Poster URL  : " + posterURL);
-
-            System.out.println();
-
             Connection conn = DriverManager.getConnection(System.getenv("DB_URL") , System.getenv("DB_USERNAME") , System.getenv("DB_PASSWORD"));
             PreparedStatement pstmt =
                     conn.prepareStatement("insert into movie (title , `year` , rating , run_time , poster) values (? , ? , ? , ? , ?)");
