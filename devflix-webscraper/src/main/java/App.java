@@ -9,6 +9,7 @@ public class App {
 //        PersonScraper.scrape();
 //        CountryScraper.scrape();
 //        LanguageScraper.scrape();
+        DirectorScraper.scrape();
 
 //        WebScraper.scrape();
     }
