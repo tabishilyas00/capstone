@@ -18,27 +18,28 @@ public class DirectorScraper {
         Document top = Jsoup.connect(url).get();
         Elements body = top.select("li.ipc-metadata-list-summary-item");
 
+        String title;
         for (Element e : body.select("li")) {
             String movieURL = imdbURL + e.select("a.ipc-lockup-overlay").attr("href");
             Document movie = Jsoup.connect(movieURL).get();
 
-            Elements basicInfo = movie.select("div.sc-dffc6c81-0");
-            String title = basicInfo.select("h1.sc-aFE43DEF-0 span.sc-afe43def-1").text();
-            System.out.println("Title : " + title);
+            Elements header = movie.select("div.sc-dffc6c81-0");
+            title = header.select("h1.sc-aFE43DEF-0 span.sc-afe43def-1").text();
 
-            Elements crewList = movie.select("ul.ipc-metadata-list.ipc-metadata-list--dividers-all.title-pc-list.ipc-metadata-list--baseAlt");
-            Elements directorSection = crewList.select("li.ipc-metadata-list__item");
-            List<String> directorNameList = new ArrayList<>();
-            if (directorSection.attr("data-testid").equals("title-pc-principal-credit") && (directorSection.select("span.ipc-metadata-list-item__label.ipc-metadata-list-item__label--btn").text().equals("Director") || directorSection.select("span.ipc-metadata-list-item__label.ipc-metadata-list-item__label--btn").text().equals("Directors"))) {
-                List<Element> directorList = directorSection.select("a.ipc-metadata-list-item__list-content-item.ipc-metadata-list-item__list-content-item--link").stream().toList();
-                for (Element d : directorList) {
-                    directorNameList.add(d.text());
+            Elements crewDiv = movie.select("div.sc-dffc6c81-3.jFHENY");
+            List<Element> crewNameLists = crewDiv.select("li.ipc-metadata-list__item").stream().toList();
+            List<Element> directorList = new ArrayList<>();
+            for (Element c : crewNameLists) {
+                if (c.text().contains("Director")) {
+                    directorList = c.select("li.ipc-inline-list__item").stream().toList();
                 }
             }
 
-            for (String d : directorNameList) {
-                System.out.println("Director : " + d);
+            System.out.println("Title    : " + title);
+            for (Element d : directorList) {
+                System.out.println("Director : " + d.text());
             }
+            System.out.println();
         }
     }
 }

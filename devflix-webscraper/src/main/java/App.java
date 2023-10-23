@@ -6,7 +6,9 @@ import java.sql.SQLException;
 public class App {
     public static void main(String[] args) throws IOException, SQLException {
 //        DirectorScraper.scrape();
-
-//        WebScraper.scrape();
+//        WriterScraper.scrape();
+//        StarScraper.scrape();
+//        MovieCountryScraper.scrape();
+//        MovieLanguageScraper.scrape();
     }
 }
