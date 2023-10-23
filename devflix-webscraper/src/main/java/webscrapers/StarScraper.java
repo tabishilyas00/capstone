@@ -6,12 +6,14 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class StarScraper {
     public static void scrape() throws IOException, SQLException {
+        Connection conn = DriverManager.getConnection(System.getenv("DB_URL") , System.getenv("DB_USERNAME") , System.getenv("DB_PASSWORD"));
+
         final String url = "https://www.imdb.com/chart/top/?ref_=nv_mv_250";
         final String imdbURL = "https://www.imdb.com";
 
@@ -35,11 +37,80 @@ public class StarScraper {
                 }
             }
 
-            System.out.println("Title : " + title);
+            int movieID = findMovieID(title , conn);
+
+            System.out.printf("Movie ID : %d%n" , movieID);
+            System.out.println("Title    : " + title);
             for (Element s : starList) {
-                System.out.println("Star  : " + s.text());
+                int starID = findStarID(s.text() , conn);
+
+                System.out.printf("Person ID : %d%n" , starID);
+                System.out.println("Star      : " + s.text());
+
+                addStar(movieID , starID , conn);
             }
             System.out.println();
         }
+
+        conn.close();
+    }
+
+    public static int findMovieID(String title , Connection conn) throws SQLException {
+        final String sql = """
+                select
+                    movie_id
+                from movie
+                where title = ?;
+                """;
+
+        PreparedStatement pstmt =
+                conn.prepareStatement(sql);
+        pstmt.setString(1, title);
+
+        ResultSet rs = pstmt.executeQuery();
+        int movieID = 0;
+        while (rs.next()) {
+            movieID = rs.getInt("movie_id");
+        }
+
+        rs.close();
+        pstmt.close();
+        return movieID;
+    }
+
+    public static int findStarID(String name , Connection conn) throws SQLException {
+        final String sql = """
+                select
+                    person_id
+                from person
+                where name = ?;
+                """;
+
+        PreparedStatement pstmt =
+                conn.prepareStatement(sql);
+        pstmt.setString(1, name);
+
+        ResultSet rs = pstmt.executeQuery();
+        int movieID = 0;
+        while (rs.next()) {
+            movieID = rs.getInt("person_id");
+        }
+
+        rs.close();
+        pstmt.close();
+        return movieID;
+    }
+
+    public static void addStar(int movieID , int starID , Connection conn) throws SQLException {
+        final String sql = """
+                insert into movie_star (movie_id , star_id) values (? , ?)
+                """;
+
+        PreparedStatement pstmt =
+                conn.prepareStatement(sql);
+        pstmt.setString(1, String.valueOf(movieID));
+        pstmt.setString(2, String.valueOf(starID));
+        pstmt.executeUpdate();
+        pstmt.close();
     }
 }
