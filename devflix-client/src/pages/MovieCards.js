@@ -7,7 +7,7 @@ const URL = 'http://localhost:8080/api/movie'
 
 export default function MovieCards() {
     const [movies , setMovies] = useState([]);
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(URL)
@@ -27,7 +27,7 @@ export default function MovieCards() {
             .then(setMovies)
             .catch(error => {
                 console.error(error);
-                // navigate('/error' , {state: {error}});
+                navigate('/error' , {state: {error}});
             })
     } , []);
 

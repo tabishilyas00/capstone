@@ -95,32 +95,32 @@ create table movie_language (
 delimiter //
 create procedure set_known_good_state()
 begin
-	delete from movie;
-    alter table movie auto_increment = 1;
-
+	delete from movie_language;
+    alter table movie_language auto_increment = 1;
+    
+    delete from movie_country;
+    alter table movie_country auto_increment = 1;
+    
+    delete from movie_star;
+    alter table movie_star auto_increment = 1;
+    
+    delete from movie_writer;
+    alter table movie_writer auto_increment = 1;
+    
+    delete from movie_director;
+    alter table movie_director auto_increment = 1;
+    
+    delete from lang;
+    alter table lang auto_increment = 1;
+    
+    delete from country;
+    alter table country auto_increment = 1;
+    
     delete from person;
     alter table person auto_increment = 1;
 
-    delete from country;
-    alter table country auto_increment = 1;
-
-    delete from lang;
-    alter table lang auto_increment = 1;
-
-    delete from movie_director;
-    alter table movie_director auto_increment = 1;
-
-    delete from movie_writer;
-    alter table movie_writer auto_increment = 1;
-
-    delete from movie_star;
-    alter table movie_star auto_increment = 1;
-
-    delete from movie_country;
-    alter table movie_country auto_increment = 1;
-
-    delete from movie_language;
-    alter table movie_language auto_increment = 1;
+	delete from movie;
+    alter table movie auto_increment = 1;
 
     insert into movie (movie_id , title , `year` , rating , run_time , poster) values
         (1 , 'There Will Be Blood'                            , '2007' , 'R'  , '2h 38m' , 'https://m.media-amazon.com/images/M/MV5BMjAxODQ4MDU5NV5BMl5BanBnXkFtZTcwMDU4MjU1MQ@@._V1_QL75_UX190_CR0,0,190,281_.jpg'                                ),

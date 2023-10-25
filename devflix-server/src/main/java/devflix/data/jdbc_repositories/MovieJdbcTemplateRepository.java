@@ -54,10 +54,10 @@ public class MovieJdbcTemplateRepository implements MovieRepository {
         final String sql = """
                 select
                     md.movie_id , md.director_id ,
-                    d.name      , d.imageURL
+                    d.name      , d.imageURL , d.person_id
                 from movie_director md
                 inner join person d on md.director_id = d.person_id
-                where md.movie_id = ?;
+                where md.movie_id = ?
                 """;
 
         var directors = jdbcTemplate.query(sql , new DirectorMapper() , movie.getMovieID());
@@ -68,10 +68,10 @@ public class MovieJdbcTemplateRepository implements MovieRepository {
         final String sql = """
                 select
                     mw.movie_id , mw.writer_id ,
-                    w.name      , w.imageURL
+                    w.name      , w.imageURL , w.person_id
                 from movie_writer mw
                 inner join person w on mw.writer_id = w.person_id
-                where mw.movie_id = ?;
+                where mw.movie_id = ?
                 """;
 
         var writers = jdbcTemplate.query(sql , new WriterMapper() , movie.getMovieID());
@@ -82,10 +82,10 @@ public class MovieJdbcTemplateRepository implements MovieRepository {
         final String sql = """
                 select
                     ms.movie_id , ms.star_id ,
-                    s.name      , s.imageURL
+                    s.name      , s.imageURL , s.person_id
                 from movie_star ms
                 inner join person s on ms.star_id = s.person_id
-                where ms.movie_id = ?;
+                where ms.movie_id = ?
                 """;
 
         var stars = jdbcTemplate.query(sql , new StarMapper() , movie.getMovieID());
@@ -99,7 +99,7 @@ public class MovieJdbcTemplateRepository implements MovieRepository {
                     c.name
                 from movie_country mc
                 inner join country c on mc.country_id = c.country_id
-                where mc.movie_id = ?;
+                where mc.movie_id = ?
                 """;
 
         var countries = jdbcTemplate.query(sql , new MovieCountryMapper() , movie.getMovieID());
@@ -113,7 +113,7 @@ public class MovieJdbcTemplateRepository implements MovieRepository {
                     l.name
                 from movie_language ml
                 inner join lang l on ml.language_id = l.language_id
-                where ml.movie_id = ?;
+                where ml.movie_id = ?
                 """;
 
         var languages = jdbcTemplate.query(sql , new MovieLanguageMapper() , movie.getMovieID());
