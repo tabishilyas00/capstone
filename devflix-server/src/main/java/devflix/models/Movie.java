@@ -9,11 +9,11 @@ public class Movie {
     private String rating;
     private String runTime;
     private String posterURL;
-    private List<Country> country;
-    private List<Language> language;
-    private List<Person> directorList;
-    private List<Person> writerList;
-    private List<Person> starList;
+    private List<MovieCountry> country;
+    private List<MovieLanguage> language;
+    private List<Director> directorList;
+    private List<Writer> writerList;
+    private List<Star> starList;
 
     public Movie() {}
     public Movie(int movieID, String title, String year, String rating, String runTime, String posterURL) {
@@ -73,43 +73,43 @@ public class Movie {
         this.posterURL = posterURL;
     }
 
-    public List<Country> getCountry() {
+    public List<MovieCountry> getCountry() {
         return country;
     }
 
-    public void setCountry(List<Country> country) {
+    public void setCountry(List<MovieCountry> country) {
         this.country = country;
     }
 
-    public List<Language> getLanguage() {
+    public List<MovieLanguage> getLanguage() {
         return language;
     }
 
-    public void setLanguage(List<Language> language) {
+    public void setLanguage(List<MovieLanguage> language) {
         this.language = language;
     }
 
-    public List<Person> getDirectorList() {
+    public List<Director> getDirectorList() {
         return directorList;
     }
 
-    public void setDirectorList(List<Person> directorList) {
+    public void setDirectorList(List<Director> directorList) {
         this.directorList = directorList;
     }
 
-    public List<Person> getWriterList() {
+    public List<Writer> getWriterList() {
         return writerList;
     }
 
-    public void setWriterList(List<Person> writerList) {
+    public void setWriterList(List<Writer> writerList) {
         this.writerList = writerList;
     }
 
-    public List<Person> getStarList() {
+    public List<Star> getStarList() {
         return starList;
     }
 
-    public void setStarList(List<Person> starList) {
+    public void setStarList(List<Star> starList) {
         this.starList = starList;
     }
 }

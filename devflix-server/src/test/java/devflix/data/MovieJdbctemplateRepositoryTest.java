@@ -9,8 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 class MovieJdbctemplateRepositoryTest {
@@ -30,5 +29,11 @@ class MovieJdbctemplateRepositoryTest {
         List<Movie> movies = repository.findAll();
         assertNotNull(movies);
         assertTrue(movies.size() > 0);
+    }
+
+    @Test
+    void shouldFindTWBB() {
+        Movie twbb = repository.findByID(1);
+        assertEquals("There Will Be Blood" , twbb.getTitle());
     }
 }
