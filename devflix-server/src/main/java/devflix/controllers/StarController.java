@@ -1,8 +1,6 @@
 package devflix.controllers;
 
-import devflix.domain.DirectorService;
 import devflix.domain.StarService;
-import devflix.models.Director;
 import devflix.models.Star;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

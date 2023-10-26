@@ -1,4 +1,9 @@
 package devflix.data.repositories;
 
-public class MovieLanguageRepository {
+import devflix.models.MovieLanguage;
+
+import java.util.List;
+
+public interface MovieLanguageRepository {
+    List<MovieLanguage> findMovieLanguage(int movieID);
 }

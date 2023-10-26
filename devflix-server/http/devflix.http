@@ -18,3 +18,11 @@ GET {{url}}/{{movieID}}/writer
 ###
 
 GET {{url}}/{{movieID}}/star
+
+###
+
+GET {{url}}/{{movieID}}/country
+
+###
+
+GET {{url}}/{{movieID}}/language
