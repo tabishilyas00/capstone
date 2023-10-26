@@ -43,6 +43,52 @@ export default function MoviePage() {
             })
     } , []);
 
+    const [writers , setWriters] = useState([]);
+    useEffect(() => {
+        fetch(URL + id + '/writer')
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                } else if (res.status >= 500) {
+                    return res
+                        .json()
+                        .then(error =>
+                            Promise.reject(new Error(error.message))    
+                        );
+                } else {
+                    return Promise.reject(new Error(res.status));
+                }
+            })
+            .then(setWriters)
+            .catch(error => {
+                console.error(error);
+                navigate('/error' , {state: {error}});
+            })
+    } , []);
+
+    const [stars , setStars] = useState([]);
+    useEffect(() => {
+        fetch(URL + id + '/star')
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                } else if (res.status >= 500) {
+                    return res
+                        .json()
+                        .then(error =>
+                            Promise.reject(new Error(error.message))    
+                        );
+                } else {
+                    return Promise.reject(new Error(res.status));
+                }
+            })
+            .then(setStars)
+            .catch(error => {
+                console.error(error);
+                navigate('/error' , {state: {error}});
+            })
+    } , []);
+
     if (!movie) {
         return null;
     }
@@ -83,8 +129,8 @@ export default function MoviePage() {
                 <h1 className = "display-3 text-white">Writer(s)</h1>
 
                 <div className = "row row-cols-1 row-cols-md-2 row-cols-lg-3 g-1">
-                    {directors.map(director => (
-                        <PersonCard person = {director} key = {movie.movieID} />
+                    {writers.map(writer => (
+                        <PersonCard person = {writer} key = {movie.movieID} />
                     ))}
                 </div>
             </div>
@@ -93,8 +139,8 @@ export default function MoviePage() {
                 <h1 className = "display-3 text-white">Stars</h1>
 
                 <div className = "row row-cols-1 row-cols-md-2 row-cols-lg-3 g-1">
-                    {directors.map(director => (
-                        <PersonCard person = {director} key = {movie.movieID} />
+                    {stars.map(star => (
+                        <PersonCard person = {star} key = {movie.movieID} />
                     ))}
                 </div>
             </div>
