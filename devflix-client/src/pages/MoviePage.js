@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import PersonCard from "../components/PersonCard";
+import DirectorCard from "../components/DirectorCard";
+import WriterCard from "../components/WriterCard";
 
 const URL = 'http://localhost:8080/api/movie/'
 
@@ -120,7 +121,7 @@ export default function MoviePage() {
 
                 <div className = "row row-cols-1 row-cols-md-2 row-cols-lg-3 g-1">
                     {directors.map(director => (
-                        <PersonCard person = {director} key = {movie.movieID} />
+                        <DirectorCard person = {director} key = {movie.movieID} />
                     ))}
                 </div>
             </div>
@@ -130,7 +131,7 @@ export default function MoviePage() {
 
                 <div className = "row row-cols-1 row-cols-md-2 row-cols-lg-3 g-1">
                     {writers.map(writer => (
-                        <PersonCard person = {writer} key = {movie.movieID} />
+                        <WriterCard person = {writer} key = {movie.movieID} />
                     ))}
                 </div>
             </div>
@@ -140,7 +141,7 @@ export default function MoviePage() {
 
                 <div className = "row row-cols-1 row-cols-md-2 row-cols-lg-3 g-1">
                     {stars.map(star => (
-                        <PersonCard person = {star} key = {movie.movieID} />
+                        <StarCard person = {star} key = {movie.movieID} />
                     ))}
                 </div>
             </div>

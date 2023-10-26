@@ -1,4 +1,4 @@
-export default function PersonCard({person}) {
+export default function DirectorCard({person}) {
     console.log(person);
 
     return (

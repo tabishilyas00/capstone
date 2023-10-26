@@ -1,5 +1,5 @@
 @url = http://localhost:8080/api/movie
-@movieID = 19
+@movieID = 1
 
 GET {{url}} HTTP/1.1
 
