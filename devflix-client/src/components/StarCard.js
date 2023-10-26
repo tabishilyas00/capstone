@@ -1,5 +1,12 @@
 export default function StarCard({person}) {
     console.log(person);
+    let src = null;
+
+    if (person.star.imageURL) {
+        src = person.star.imageURL;
+    } else {
+        src = "../image_not_found.png";
+    }
 
     return (
         <div className = "card text-white bg-dark m-2" style = {{width: '250px'}}>
@@ -7,7 +14,7 @@ export default function StarCard({person}) {
                 <img
                     className = "card-img-top"
                     style = {{height: '350px' , objectFit: "contain"}}
-                    src = {person.star.imageURL}
+                    src = {src}
                     alt = {`${person.star.name}`}
                 />
             </div>

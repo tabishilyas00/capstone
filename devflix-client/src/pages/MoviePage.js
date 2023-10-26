@@ -91,6 +91,52 @@ export default function MoviePage() {
             })
     } , []);
 
+    const [countries , setCountries] = useState([]);
+    useEffect(() => {
+        fetch(URL + id + '/country')
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                } else if (res.status >= 500) {
+                    return res
+                        .json()
+                        .then(error =>
+                            Promise.reject(new Error(error.message))    
+                        );
+                } else {
+                    return Promise.reject(new Error(res.status));
+                }
+            })
+            .then(setCountries)
+            .catch(error => {
+                console.error(error);
+                navigate('/error' , {state: {error}});
+            })
+    } , []);
+
+    const [languages , setLanguages] = useState([]);
+    useEffect(() => {
+        fetch(URL + id + '/language')
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                } else if (res.status >= 500) {
+                    return res
+                        .json()
+                        .then(error =>
+                            Promise.reject(new Error(error.message))    
+                        );
+                } else {
+                    return Promise.reject(new Error(res.status));
+                }
+            })
+            .then(setLanguages)
+            .catch(error => {
+                console.error(error);
+                navigate('/error' , {state: {error}});
+            })
+    } , []);
+
     if (!movie) {
         return null;
     }
@@ -98,7 +144,7 @@ export default function MoviePage() {
     return (
         <div>
             <div style = {{display: 'flex'}}>
-                <div style={{ flex: '1' , padding: '22px'}}>
+                <div style={{ flex: '1' , padding: '22px' , marginTop: '65px'}}>
                     <img 
                         src = {movie.posterURL}
                         alt = {movie.title}
@@ -113,6 +159,8 @@ export default function MoviePage() {
                         <li className = "list-group-item display-6 text-white bg-black">Year: {movie.year}</li>
                         <li className = "list-group-item display-6 text-white bg-black">Rating: {movie.rating}</li>
                         <li className = "list-group-item display-6 text-white bg-black">Runtime: {movie.runTime}</li>
+                        <li className = "list-group-item display-6 text-white bg-black">Country(ies): {countries.map(c => `${c.country.name}    `)}</li>
+                        <li className = "list-group-item display-6 text-white bg-black">Language(s): {languages.map(l => `${l.language.name}    `)}</li>
                     </ul>
                 </div>
             </div>
