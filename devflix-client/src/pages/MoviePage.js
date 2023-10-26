@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import DirectorCard from "../components/DirectorCard";
 import WriterCard from "../components/WriterCard";
+import StarCard from "../components/StarCard";
 
 const URL = 'http://localhost:8080/api/movie/'
 
