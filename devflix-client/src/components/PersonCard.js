@@ -7,14 +7,14 @@ export default function PersonCard({person}) {
                 <img
                     className = "card-img-top"
                     style = {{height: '350px' , objectFit: "contain"}}
-                    src = {person.imageURL}
-                    alt = {`${person.name}`}
+                    src = {person.director.imageURL}
+                    alt = {`${person.director.name}`}
                 />
             </div>
 
             <div className = "card-body">
                 <h2 className = "card-title fs-4">
-                    {person.name}
+                    {person.director.name}
                 </h2>
             </div>
         </div>

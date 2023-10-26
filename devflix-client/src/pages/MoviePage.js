@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import PersonCard from "../components/PersonCard";
 
 const URL = 'http://localhost:8080/api/movie/'
 
 export default function MoviePage() {
     const [movie , setMovie] = useState(null);
     const { id } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (id) {
@@ -17,6 +19,29 @@ export default function MoviePage() {
                 });
         }
     } , [id]);
+
+    const [directors , setDirectors] = useState([]);
+    useEffect(() => {
+        fetch(URL + id + '/director')
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                } else if (res.status >= 500) {
+                    return res
+                        .json()
+                        .then(error =>
+                            Promise.reject(new Error(error.message))    
+                        );
+                } else {
+                    return Promise.reject(new Error(res.status));
+                }
+            })
+            .then(setDirectors)
+            .catch(error => {
+                console.error(error);
+                navigate('/error' , {state: {error}});
+            })
+    } , []);
 
     if (!movie) {
         return null;
@@ -41,6 +66,36 @@ export default function MoviePage() {
                         <li className = "list-group-item display-6 text-white bg-black">Rating: {movie.rating}</li>
                         <li className = "list-group-item display-6 text-white bg-black">Runtime: {movie.runTime}</li>
                     </ul>
+                </div>
+            </div>
+
+            <div>
+                <h1 className = "display-3 text-white">Director(s)</h1>
+
+                <div className = "row row-cols-1 row-cols-md-2 row-cols-lg-3 g-1">
+                    {directors.map(director => (
+                        <PersonCard person = {director} key = {movie.movieID} />
+                    ))}
+                </div>
+            </div>
+
+            <div>
+                <h1 className = "display-3 text-white">Writer(s)</h1>
+
+                <div className = "row row-cols-1 row-cols-md-2 row-cols-lg-3 g-1">
+                    {directors.map(director => (
+                        <PersonCard person = {director} key = {movie.movieID} />
+                    ))}
+                </div>
+            </div>
+
+            <div>
+                <h1 className = "display-3 text-white">Stars</h1>
+
+                <div className = "row row-cols-1 row-cols-md-2 row-cols-lg-3 g-1">
+                    {directors.map(director => (
+                        <PersonCard person = {director} key = {movie.movieID} />
+                    ))}
                 </div>
             </div>
         </div>
