@@ -1,7 +1,7 @@
 # Devflix
 
 ## Setup Instructions
-- Run the devflix.sql file to generate the schema
+- Run the devflix.sql file to generate the schema (found in "devflix-server/sql" folder)
 - Launch the devflix-webscraper in and set your database environment variables
 - Run each scraper
 	- Run the scrapers one at a time
@@ -12,3 +12,68 @@
 - Browse the movies available
 	- Click the "Details" button on the movie of your choice to go to its detail page
 - Enjoy Devflix
+
+## Task List
+- Setup Devflix schema tables (10 mins)
+- Webscraper
+	- Learn Webscraping (4 hours)
+	- Movie Scraper (2 hours)
+	- Person Scraper (4 hours)
+	- Country Scraper (30 mins)
+	- Language Scraper (30 mins)
+	- Director Scraper (2 hours)
+	- Writer Scraper (2 hours)
+	- Star Scraper (2 hours)
+	- Movie Country Scraper (20 mins)
+	- Movie Language Scraper (20 mins)
+- Backend Functions
+	- Movie
+		- Model (10 mins)
+		- Data
+			- findAll() (10 mins)
+			- findByID() (20 mins)
+		- Domain (5 mins)
+		- Controller (5 mins)
+	- Director
+		- Model (10 mins)
+		- Data
+			- findDirector() (5 mins)
+		- Domain (5 mins)
+		- Controller (5 mins)
+	- Writer
+		- Model (10 mins)
+		- Data
+			- findWriter() (5 mins)
+		- Domain (5 mins)
+		- Controller (5 mins)
+	- Star
+		- Model (10 mins)
+		- Data
+			- findStar() (5 mins)
+		- Domain (5 mins)
+		- Controller (5 mins)
+	- Movie Country
+		- Model (10 mins)
+		- Data
+			- findMovieCountry() (5 mins)
+		- Domain (5 mins)
+		- Controller (5 mins)
+	- Movie Language
+		- Model (10 mins)
+		- Data
+			- findMovieLanguage() (5 mins)
+		- Domain (5 mins)
+		- Controller (5 mins)
+- Frontend
+	- Components
+		- Nav (30 mins)
+		- MovieCard (1 hour)
+		- Person Cards
+			- Director (30 mins)
+			- Writer (30 mins)
+			- Star (30 mins)
+	- Pages
+		- Error (5 mins)
+		- MovieCards (1 hour)
+		- MoviePage (2 hours)
+	- App (10 mins)
